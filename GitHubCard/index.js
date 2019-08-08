@@ -35,7 +35,22 @@ cards.appendChild(cardInfo);
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [
+  'misskellymore',
+  'nomadkitty',
+  'MosesSupposes',
+  'jaredkain',
+  'TamaHills'
+];
+
+followersArray.forEach(user => {
+  axios.get(`https://api.github.com/users/${user}`)
+    .then (data => {
+      const card = createCard(data.data);
+      const cards = document.querySelector('.cards');
+      cards.appendChild(card);
+    })
+})
 
 
 
