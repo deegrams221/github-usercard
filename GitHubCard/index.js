@@ -4,10 +4,10 @@
 */
 
 axios.get('https://api.github.com/users/deegrams221')
-  .then (response => {
-    //console.log(`User Info: `, response);
-  });
-    
+  .then (data => {
+    //console.log(`User Info: `, data);
+    const myInfo = data.data;
+    //console.log(`User Info: `, myInfo)
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -20,6 +20,11 @@ axios.get('https://api.github.com/users/deegrams221')
            create a new component and add it to the DOM as a child of .cards
 */
 
+const cards = document.querySelector('.cards');
+const cardInfo = createCard(myInfo);
+cards.appendChild(cardInfo);
+
+})
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
           , manually find some other users' github handles, or use the list found 
@@ -31,6 +36,8 @@ axios.get('https://api.github.com/users/deegrams221')
 */
 
 const followersArray = [];
+
+
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -84,12 +91,13 @@ const createCard = (data) => {
   // set content
   img.src = data.avatar_url;
   name.textContent = data.name;
-  userName.textContent = data.login;
+  userName.textContent = `Username: ${data.login}`;
   location.textContent = data.location;
-  profileLink.textContent = data.profileLink;
-  followers.textContent = data.followers;
-  following.textContent = data.following;
-  bio.textContent = data.bio;
+  const profileLinks = data.url;
+  profileLink.innerHTML = profileLinks.link(data.url);
+  followers.textContent = `Followers: ${data.followers}`;
+  following.textContent = `Following: ${data.following}`;
+  bio.textContent = `Bio: ${data.bio}`;
 
   // class names
   card.classList.add('card');
