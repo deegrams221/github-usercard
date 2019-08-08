@@ -1,7 +1,13 @@
 /* Step 1: using axios, send a GET request to the following URL 
            (replacing the palceholder with your Github name):
-           https://api.github.com/users/<your name>
+           https://api.github.com/users/deegrams221
 */
+
+axios.get('https://api.github.com/users/deegrams221')
+  .then (response => {
+    console.log(`User Info: `, response);
+  });
+    
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
